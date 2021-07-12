@@ -1,0 +1,283 @@
+# ------------------------------------------------- #
+# --- Tela Principal
+# ------------------------------------------------- #
+
+
+<TPrincipal>:
+	name: 'tprincipal'
+	id: tela_principal
+
+	FloatLayout:
+		canvas:
+			Color:
+				#rgba: (0.04, 0.15, 0.26, 1)
+			Rectangle:
+				pos: self.pos
+				size: self.size
+                source: self.background_down
+        background_down: 'ImagesApp/Azul1.png'
+
+		# --- Barra Superior --- #
+		FloatLayout:
+			pos_hint: {'x': 0, 'top': 1}
+			size_hint: (1, .1)
+
+			ModeloLbTitulo:
+				text: 'Home'
+                halign: 'left'
+				valign: 'middle'
+				bold: True
+				font_size: '40sp'
+				text: 'Home'
+				outline_width: 1
+                outline_color: [0,0,0]
+	            font_name: 'RobotoMono-Regular'
+
+			ModeloBtn:
+				pos_hint: {'x': .73, 'top': .80}
+				size_hint: (.10, .6)
+				text: 'Register'
+				on_release: app.root.close_wid()
+				on_release: root.limpa_widpesquisa()
+				on_release: app.root.current = 'tcadastro'
+				outline_width: 1
+                outline_color: [0,0,0]
+	            font_name: 'RobotoMono-Regular'
+ 
+	# ----- Pesquisa ----- #
+	FloatLayout:
+		id: box_intdados
+		pos_hint: {'x': .05, 'top': .85}
+		size_hint: (.40, .70)
+
+		# ----- Fundo pesquisa ----- #
+		BoxLayout:
+			# canvas:
+			# 	Color:
+			# 		rgba: (0, 0, 0, 0)
+			# 	Rectangle:
+			# 		pos: self.pos
+			# 		size: self.size
+			pos_hint: {'x': 0, 'top': 1}
+			size_hint: (1, .27)
+
+		# ----- Titulo Principal ----- #
+		Label:
+			id: textopesquisa
+			pos_hint: {'x': 0, 'y': .93}
+			size_hint: (.40, .05)
+			padding: (1, 0)
+			color: (0.9, 0.9, 1, 1)
+			font_size: '20sp'
+			text: 'Search User'
+			text_size: self.size
+			halign: 'left'
+			valign: 'center'
+			outline_width: 1
+            outline_color: [0,0,0]
+			font_name: 'RobotoMono-Regular'
+
+		# ----- Input Pesquisa ----- #
+		TextInput:
+			id: input_pesquisa
+			background_color:  (0.83, 0.94, 1, 1) if self.focus else (0.9, 0.9, 1, 1)
+			size_hint: (1, .06)
+			pos_hint: {'x': 0, 'y': .85}
+			hint_text: 'Search'
+			multiline: False
+			write_tab: False
+			outline_width: 1
+            outline_color: [0,0,0]
+			font_name: 'RobotoMono-Regular'
+
+		# ----- Botão de Limpar ----- #
+		ModeloBtn:
+			pos_hint: {'right': .75, 'y': .76}
+			size_hint: (.20, .07)
+			text: 'Clean'
+			on_release: app.root.close_wid()
+			on_release: root.limpa_widpesquisa()
+			outline_width: 1
+            outline_color: [0,0,0]
+			font_name: 'RobotoMono-Regular'
+
+		# ----- Botão de Pesquisar ----- #
+		ModeloBtn:
+			id: btn_pesquisa
+			pos_hint: {'right': .99, 'y': .76}
+			size_hint: (.20, .07)
+			text: 'Search'
+			on_release: root.pesquisa_usuario()
+			outline_width: 1
+            outline_color: [0,0,0]
+			font_name: 'RobotoMono-Regular'
+
+		# ----- ScrollView de Resultados ----- #
+		Scrollwid:
+			id: scrollwid
+			pos_hint: {'x': 0, 'y': 0}
+			size_hint: (1, .70)
+
+			BoxLayout: # --- Box de Resultados --- #
+				id: box_scrollwid
+				spacing: 10
+				orientation: 'vertical'
+				size_hint_y: None
+				height: self.minimum_height
+
+
+# ----- Scroll Wid Child ----- #
+<ScroolWidChild>:
+	id: btn_widchild
+	canvas:
+		Color:
+			rgba: (0.9, 0.9, 1, 1)
+		Line:
+			width: 1
+			rectangle: self.x, self.y, self.width, self.height
+	background_normal: 'ImagesApp/trans100.png'
+	size_hint_y: None
+	height: 40
+	color: (0.9, 0.9, 1, 1)
+	text_size: self.size
+	padding: (10, 0)
+	halign: 'left'
+	valign: 'center'
+	on_release: app.root.resultado_final_pesquisa(self.text)
+
+
+# ----- Wid resultados da pesquisa ----- #
+<ResPesquisaWid>:
+	id: wid_dados_pesquisa
+	canvas:
+		Color:
+			rgba: (0.9, 0.9, 1, 1)
+		Line:
+			width: 1
+			rectangle: self.x, self.y, self.width, self.height
+	pos_hint: {'x': .55, 'top': .78}
+	size_hint: (0.40, 0.62)
+
+	# ----- Titulo widget usuario ----- #
+	Label:
+		pos_hint: {'x': .04, 'top': .97}
+		size_hint: (.40, .05)
+		padding: (1, 0)
+		color: (0.9, 0.9, 1, 1)
+		font_size: '20sp'
+		text: 'User'
+		text_size: self.size
+		halign: 'left'
+		valign: 'center'
+		outline_width: 1
+        outline_color: [0,0,0]
+	    font_name: 'RobotoMono-Regular'
+
+	# ----- Botão de Sair ----- #
+	Button:
+		pos_hint: {'x': .92, 'top': .965}
+		size_hint: (.05, .06)
+		background_normal: 'ImagesApp/Close.png'
+		background_down: 'Images/Close.png'
+		border: (0, 0, 0, 0)
+		on_release: app.root.close_wid()
+
+	# ----- Labels ----- #
+	WidLabelTexto:
+		pos_hint: {'x': .04, 'top': .85}
+		text: 'Name:'
+		outline_width: 1
+        outline_color: [0,0,0]
+	    font_name: 'RobotoMono-Regular'
+
+	WidLabelTexto:
+		pos_hint: {'x': .04, 'top': .75}
+		text: 'CPF:'
+		outline_width: 1
+        outline_color: [0,0,0]
+	    font_name: 'RobotoMono-Regular'
+
+	WidLabelTexto:
+		pos_hint: {'x': .04, 'top': .65}
+		text: 'Office:'
+		outline_width: 1
+        outline_color: [0,0,0]
+	    font_name: 'RobotoMono-Regular'
+
+	WidLabelTexto:
+		pos_hint: {'x': .04, 'top': .55}
+		text: 'Email:'
+		outline_width: 1
+        outline_color: [0,0,0]
+	    font_name: 'RobotoMono-Regular'
+
+	WidLabelTexto:
+		pos_hint: {'x': .04, 'top': .45}
+		text: 'Register:'
+		outline_width: 1
+        outline_color: [0,0,0]
+	    font_name: 'RobotoMono-Regular'
+
+	# ----- Resultados Labels ----- #
+	WidLabelResultados:
+		id: lbl_01
+		pos_hint: {'x': .20, 'top': .85}
+		text: 'Antonio Manuel Neves'
+
+	WidLabelResultados:
+		id: lbl_02
+		pos_hint: {'x': .20, 'top': .75}
+
+	WidLabelResultados:
+		id: lbl_03
+		pos_hint: {'x': .20, 'top': .65}
+
+	WidLabelResultados:
+		id: lbl_04
+		pos_hint: {'x': .20, 'top': .55}
+
+	WidLabelResultados:
+		id: lbl_05
+		pos_hint: {'x': .20, 'top': .45}
+
+	BoxLayout:
+		pos_hint: {'x': 0, 'y': .02}
+		size_hint: (1, .25)
+		# padding: 2
+		# spacing: 5
+
+		# ----- Photos ----- #
+		Image:
+			id: img01
+			border: (0, 0, 0, 0)
+
+		Image:
+			id: img02
+			border: (0, 0, 0, 0)
+
+		Image:
+			id: img03
+			border: (0, 0, 0, 0)
+
+		Image:
+			id: img04
+			border: (0, 0, 0, 0)
+
+
+# ----- Modelo Wid Label resultados da pesquisa ----- #
+<WidLabelTexto>:
+	size_hint: (.15, .06)
+	text_size: self.size
+	padding: (5, 0)
+	halign: 'left'
+	valign: 'center'
+	color: (0.9, 0.9, 1, 1)
+
+
+# ----- Modelo Wid Label dados resultados da pesquisa ----- #
+<WidLabelResultados>:
+	size_hint: (.65, .06)
+	text_size: self.size
+	halign: 'left'
+	valign: 'center'
+	color: (0.9, 0.9, 1, 1)

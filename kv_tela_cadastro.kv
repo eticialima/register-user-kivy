@@ -1,0 +1,234 @@
+# ------------------------------------------------- #
+# --- Tela de Cadastro
+# ------------------------------------------------- #
+
+
+# --- Tela de Cadastro --- #
+<TCadastro>:
+	name: 'tcadastro'
+
+    # --- Tela completa --- #
+	FloatLayout:
+		canvas:
+			Color:
+				#rgba: (0.04, 0.15, 0.26, 1)
+			Rectangle:
+				pos: self.pos
+				size: self.size
+				source: self.background_down
+        background_down: 'ImagesApp/Azul1.png'
+
+		# --- Barra Superior --- #
+		FloatLayout:
+			pos_hint: {'x': 0, 'top': 1}
+			size_hint: (1, .1)
+
+			ModeloLbTitulo:
+				text: 'Cadastro'
+
+			ModeloBtn:
+				pos_hint: {'x': .85, 'top': .80}
+				size_hint: (.10, .6)
+				text: 'Home'
+				on_release: app.root.current = 'tprincipal'
+				on_release: root.limpa_formulario()
+				outline_width: 1
+                outline_color: [0,0,0]
+	            font_name: 'RobotoMono-Regular'
+
+
+		# --- Formulario de Cadastro --- #
+		FloatLayout:
+			id: formulario
+			# canvas:
+			# 	Color:
+			# 		rgba: (0, 0, 0, .2)
+			# 	Rectangle:
+			# 		pos: self.pos
+			# 		size: self.size
+			pos_hint: {'x': .05, 'top': .85}
+			size_hint: (0.40, 0.60)
+
+
+			# ----- Nome----- #
+			Label:
+				id: lbl_01
+				pos_hint: {'x': 0, 'top': .9}
+				size_hint: (.3, .05)
+				padding: (1, 0)
+				text_size: self.size
+				halign: 'left'
+				text: 'Nome'
+				outline_width: 1
+                outline_color: [0,0,0]
+	            font_name: 'RobotoMono-Regular'
+
+			TextInput:
+				id: txt_input01
+				focus: True
+				background_color: (0.96, 0.93, 0.73, 1) if self.focus else (0.83, 0.94, 1, 1)
+				pos_hint: {'x': 0, 'top': .85}
+				size_hint: (.90, .08)
+				cursor_blink: True
+				hint_text: 'Name'
+				multiline: False
+				write_tab: False
+				outline_width: 1
+                outline_color: [0,0,0]
+	            font_name: 'RobotoMono-Regular'
+
+			# ----- CPF ----- #
+			Label:
+				id: lbl_02
+				pos_hint: {'x': 0, 'top': .7}
+				size_hint: (.3, .05)
+				padding: (1, 0)
+				text_size: self.size
+				halign: 'left'
+				text: 'CPF'
+				outline_width: 1
+                outline_color: [0,0,0]
+	            font_name: 'RobotoMono-Regular'
+
+			TextInput:
+				id: txt_input02
+				background_color: (0.96, 0.93, 0.73, 1) if self.focus else (0.83, 0.94, 1, 1)
+				pos_hint: {'x': 0, 'top': .65}
+				size_hint: (.90, .08)
+				cursor_blink: True
+				hint_text: 'CPF - Somente numeros, 11 digitos'
+				multiline: False
+				write_tab: False
+				outline_width: 1
+                outline_color: [0,0,0]
+	            font_name: 'RobotoMono-Regular'
+
+			# ----- Cargo ----- #
+			Label:
+				id: lbl_03
+				pos_hint: {'x': 0, 'top': .5}
+				size_hint: (.3, .05)
+				padding: (1, 0)
+				text_size: self.size
+				halign: 'left'
+				text: 'Cargo'
+				outline_width: 1
+                outline_color: [0,0,0]
+	            font_name: 'RobotoMono-Regular'
+
+			TextInput:
+				id: txt_input03
+				background_color: (0.96, 0.93, 0.73, 1) if self.focus else (0.83, 0.94, 1, 1)
+				pos_hint: {'x': 0, 'top': .45}
+				size_hint: (.90, .08)
+				cursor_blink: True
+				hint_text: 'Office'
+				multiline: False
+				write_tab: False
+				outline_width: 1
+                outline_color: [0,0,0]
+	            font_name: 'RobotoMono-Regular'
+
+			# ----- Email ----- #
+			Label:
+				id: lbl_04
+				pos_hint: {'x': 0, 'top': .3}
+				size_hint: (.3, .05)
+				padding: (1, 0)
+				text_size: self.size
+				halign: 'left'
+				text: 'Email'
+				outline_width: 1
+                outline_color: [0,0,0]
+	            font_name: 'RobotoMono-Regular'
+
+			TextInput:
+				id: txt_input04
+				background_color: (0.96, 0.93, 0.73, 1) if self.focus else (0.83, 0.94, 1, 1)
+				pos_hint: {'x': 0, 'top': .25}
+				size_hint: (.90, .08)
+				cursor_blink: True
+				hint_text: 'Email'
+				multiline: False
+				write_tab: False
+				outline_width: 1
+                outline_color: [0,0,0]
+	            font_name: 'RobotoMono-Regular'
+
+			# --- Label falta de dados --- #
+			Label:
+				id: faltam_dados
+				pos_hint: {'x': 0, 'y': .05}
+				size_hint: (.90, .1)
+				color: (1, 0, 0, 1)
+				bold: True
+				font_size: '20sp'
+				outline_width: 1
+                outline_color: [0,0,0]
+	            font_name: 'RobotoMono-Regular'
+
+
+		# --- Layout de captura de imagem --- #
+		GridLayout:
+			cols: 4
+			rows: 4
+			id: camera_layout
+			canvas:
+				Color:
+					rgba: (0, 0, 0, .2)
+				Rectangle:
+					pos: self.pos
+					size: self.size
+			pos_hint: {'x': .55, 'top': .85}
+			size_hint: (0.40, 0.60)
+
+
+		# --- Barra Inferior --- #
+		FloatLayout:
+			pos_hint: {'x': 0, 'y': .1}
+			size_hint: (1, .1)
+
+			# --- Btn para limpar formulário --- #
+			ModeloBtn:
+				pos_hint: {'x': .05, 'top': .80}
+				size_hint: (.10, .6)
+				text: 'clean'
+				on_release: root.limpa_formulario()
+				outline_width: 1
+                outline_color: [0,0,0]
+	            font_name: 'RobotoMono-Regular'
+
+			# --- Btn inicio da captura de imagem --- #
+			ModeloBtn:
+				id: inicia_camera
+				pos_hint: {'x': .31, 'top': .80}
+				size_hint: (.10, .6)
+				text: 'Iniciar Captura'
+				on_release: root.inicia_captura()
+				outline_width: 1
+                outline_color: [0,0,0]
+	            font_name: 'RobotoMono-Regular'
+
+			# --- Btn tirar fotos --- #
+			ModeloBtn:
+				id: tirar_fotos
+				pos_hint: {'x': .55, 'top': .80}
+				size_hint: (.10, .6)
+				text: 'photos'
+				disabled: True
+				on_release: root.inicia_captura_fotos()
+				outline_width: 1
+                outline_color: [0,0,0]
+	            font_name: 'RobotoMono-Regular'
+
+			# --- Btn de cadastro --- #
+			ModeloBtn:
+				id: cadastro_usuario
+				pos_hint: {'x': .85, 'top': .80}
+				size_hint: (.10, .6)
+				disabled: True
+				text: 'register'
+				on_release: root.cadastra_formulario()
+				outline_width: 1
+                outline_color: [0,0,0]
+	            font_name: 'RobotoMono-Regular'
