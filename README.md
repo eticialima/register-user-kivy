@@ -1,0 +1,2 @@
+# python_kivy_system_register_simple
+python_kivy_system_register_simple
