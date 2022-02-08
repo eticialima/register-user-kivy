@@ -1,5 +1,3 @@
-### Previa
-
 <img src="demo.png?raw=true"/>
  
 ### Obrigada ❤️
