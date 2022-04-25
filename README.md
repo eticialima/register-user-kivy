@@ -1,6 +1,6 @@
 <img src="demo.png?raw=true"/>
  
-### Obrigada ❤️
+### Thanks ❤️
 [@eticialima](https://www.instagram.com/eticialima)
 
 ### buymeacoffee buymeacoffee
